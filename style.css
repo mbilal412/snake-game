@@ -1,0 +1,78 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  --bg-primary-color: black;
+  --text-primary-color: white;
+  --space-xs: 0.25rem;
+  --space-sm: 0.50rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 2.5rem;
+  --space-3xl: 3rem;
+  --fontsize-sm: 0.75rem;
+  --fontsize-md: 1rem;
+  --fontsize-lg: 1.25rem;
+  --borderradius-sm: 0.2rem;
+  --borderradius-md: 0.4rem;
+  --borderradius-lg: 0.55rem;
+}
+
+html {
+  font-size: clamp(14px, 1.5vw, 18px);
+}
+
+body {
+  background-color: var(--bg-primary-color);
+  color: var(--text-primary-color);
+}
+
+main, section {
+  height: 100%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+section .infos {
+  font-size: var(--fontsize-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+section .infos .highscore, section .infos .score, section .infos .time {
+  border: 1px solid var(--text-primary-color);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--borderradius-md);
+}
+section .board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(32px, 1fr));
+  border: 1px solid var(--text-primary-color);
+  flex-grow: 1;
+}
+section .board .block {
+  font-size: var(--fontsize-sm);
+  width: 32px;
+  height: 32px;
+  border: 1px solid gray;
+}
+
+.fill {
+  background-color: white;
+}/*# sourceMappingURL=style.css.map */
