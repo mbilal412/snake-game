@@ -1,16 +1,16 @@
 * {
-  margin: 0%;
-  padding: 0%;
-  box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-:root{
+:root {
     --bg-primary-color: black;
 
     --text-primary-color: white;
@@ -32,62 +32,99 @@ body {
     --borderradius-lg: 0.55rem;
 }
 
-html{
+html {
     font-size: clamp(14px, 1.5vw, 18px);
 }
 
-body{
+body {
     // background-color: yellow;
     background-color: var(--bg-primary-color);
     color: var(--text-primary-color);
-    
-    
+
+
 
 }
 
 
-main, section{
+main,
+section {
     height: 100%;
 }
-section{
+
+section {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
     padding: var(--space-xl);
-    .infos{
-        font-size: var(--fontsize-sm);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-
-        .highscore, .score, .time{
-            border: 1px solid var(--text-primary-color);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--borderradius-md);
-
-        }
-    }
-
-    .board{
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
-        grid-template-rows: repeat(auto-fill, minmax(32px, 1fr));
-        border: 1px solid var(--text-primary-color); 
-        flex-grow: 1;
-
-        .block{
-            font-size: var(--fontsize-sm);
-            width: 32px;
-            height: 32px;
-            border: 1px solid gray;
-
-        }
-    }
 
 
 }
 
-.fill{
+.infos {
+    font-size: var(--fontsize-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    .highscore,
+    .score,
+    .time {
+        border: 1px solid var(--text-primary-color);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--borderradius-md);
+
+    }
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(28px, 1fr));
+    border: 1px solid var(--text-primary-color);
+    flex-grow: 1;
+
+    .block {
+        font-size: var(--fontsize-sm);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid gray;
+
+    }
+}
+
+    .game-start,
+    .game-over {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        display: flex;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(59, 58, 58, 0.475);
+        backdrop-filter: blur(2px);
+        gap: var(--space-md);
+    }
+
+    button {
+        transition: all 0.1s ease;
+        padding: var(--space-sm) var(--space-md);
+        border: none;
+        font-weight: 600;
+        border-radius: var(--borderradius-md);
+    }
+
+    button:hover {
+        scale: 0.95;
+    }
+
+.fill {
     background-color: white;
+}
+
+.food {
+    background-color: magenta;
 }
