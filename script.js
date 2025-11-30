@@ -8,7 +8,9 @@ const block_width = 28;
 const block_height = 28;
 const cols = Math.floor((board.clientWidth) / block_width);
 const rows = Math.floor((board.clientHeight) / block_height);
-
+const score = document.querySelector('.score h3 span');
+const time = document.querySelector('.time h3 span');
+const highscore = document.querySelector('.highscore h3 span');
 
 const blocks = [];
 for (let row = 0; row < rows; row++) {
@@ -23,48 +25,75 @@ for (let row = 0; row < rows; row++) {
 
 game_start.style.display = 'flex';
 
-start.addEventListener('click', () => {
-    game_start.style.display = 'none';
-    intervalId = setInterval(() => {
-        showSnake();
-    }, 140);
-})
-
+let point = 0
+let highest = 0;
 let intervalId = null;
+let timeIntervalId = null;
 let direction = null;
 let snake = null;
 
 let food = null;
+let timer = '00-00';
 
 direction = "down";
-    snake = [
-        {
-            x: 5,
-            y: 5
-        },
-        {
-            x: 4,
-            y: 5
-        },
-    ]
+snake = [
+    {
+        x: 5,
+        y: 5
+    },
+    {
+        x: 4,
+        y: 5
+    },
+]
 
-    food = {
-        x: Math.floor(Math.random() * rows),
-        y: Math.floor(Math.random() * cols)
-    };
+
+
+let displayTime = function () {
+    let [min, sec] = timer.split('-').map(Number);
+    if (sec === 60) {
+        sec = 0;
+        min += 1;
+    }
+    else {
+        sec += 1;
+    }
+    console.log(sec)
+    timer = `${min}-${sec}`
+    time.innerHTML = timer;
+}
+
+
+
+start.addEventListener('click', () => {
+    game_start.style.display = 'none';
+    timeIntervalId = setInterval(() => {
+        displayTime();
+    }, 1000);
+
+    intervalId = setInterval(() => {
+        showSnake();
+    }, 90);
+})
+
+food = {
+    x: Math.floor(Math.random() * rows),
+    y: Math.floor(Math.random() * cols)
+};
+
+
 
 
 restart.addEventListener('click', resetGame)
 
 
 function resetGame() {
+
     game_over.style.display = 'none';
-    
+
     document.querySelectorAll('.block').forEach(block =>
         block.classList.remove('fill', 'food')
     )
-    
-    direction = "down";
     snake = [
         {
             x: 5,
@@ -83,10 +112,26 @@ function resetGame() {
 
     intervalId = setInterval(() => {
         showSnake();
-    }, 140);
+    }, 90);
+    timeIntervalId = setInterval(() => {
+        displayTime();
+    }, 1000);
+
+    direction = "down";
+
+    point = 0;
+    score.innerHTML = point;
+    timer = '00-00';
+    time.innerHTML = timer
+
+    highscore.innerHTML = localStorage.getItem('highest')
+
 }
 
-
+window.addEventListener('load', () => {
+    highest = Number(localStorage.getItem('highest')) || 0;
+    highscore.innerHTML = highest;
+});
 
 
 function showSnake() {
@@ -112,12 +157,21 @@ function showSnake() {
         snake.unshift(head);
         render();
         showFood();
+        point += 10;
+        if (point >= highest) {
+            highest = point;  
+            localStorage.setItem('highest', highest);
+            highscore.innerHTML = highest;
+        }
+        score.innerHTML = point;
+
         return;
     }
 
     if (head.x === rows || head.y === cols || head.x < 0 || head.y < 0) {
-        game_over.style.display = 'flex'
+        game_over.style.display = 'flex';
         clearInterval(intervalId);
+        clearInterval(timeIntervalId);
         return;
     }
     snake.forEach(element => {
@@ -151,13 +205,13 @@ function showFood() {
 
 }
 
-function showFood() {
-    food = {
-        x: Math.floor(Math.random() * rows),
-        y: Math.floor(Math.random() * cols)
-    };
+// function showFood() {
+//     food = {
+//         x: Math.floor(Math.random() * rows),
+//         y: Math.floor(Math.random() * cols)
+//     };
 
-}
+// }
 
 
 

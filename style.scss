@@ -88,8 +88,8 @@ section {
         font-size: var(--fontsize-sm);
         width: 28px;
         height: 28px;
-        border-radius: 50%;
-        border: 1px solid gray;
+        border-radius: 30%;
+        // border: 1px solid gray;
 
     }
 }
@@ -126,5 +126,5 @@ section {
 }
 
 .food {
-    background-color: magenta;
+    background-color: greenyellow;
 }
